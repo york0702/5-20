@@ -47,7 +47,7 @@ st.subheader("選擇金融商品: ")
 choices = ['台積電: 2022.1.1 至 2024.4.9', '大台指期貨2024.12到期: 2023.12 至 2024.4.11', '小台指期貨2024.12到期: 2023.12 至 2024.4.11', '英業達2020.1.2 至 2024.4.12', '堤維西2020.1.2 至 2024.4.12']
 choice = st.selectbox('選擇金融商品', choices, index=0)
 ##### 读取Pickle文件
-if choice == '台積電: 2022.1.1 至 2024.4.9':
+if choice == choices[0] :         ##'台積電: 2022.1.1 至 2024.4.9':
     df_original = load_data('kbars_2330_2022-01-01-2024-04-09.pkl')
     product_name = '台積電2330'
     # df_original = load_data('kbars_2330_2022-01-01-2024-04-09.pkl')
@@ -57,16 +57,16 @@ if choice == '台積電: 2022.1.1 至 2024.4.9':
     # df_original = df_original.drop('Unnamed: 0',axis=1)
 # if choice == '大台指2024.12到期: 2024.1 至 2024.4.9':
 #     df_original = load_data('kbars_TXF202412_2024-01-01-2024-04-09.pkl')  
-if choice == '大台指期貨2024.12到期: 2023.12 至 2024.4.11':
+if choice == choices[1] :                   ##'大台指期貨2024.12到期: 2023.12 至 2024.4.11':
     df_original = load_data('kbars_TXF202412_2023-12-21-2024-04-11.pkl')
     product_name = '大台指期貨'
-if choice == '小台指期貨2024.12到期: 2023.12 至 2024.4.11':
+if choice == choices[2] :                              ##'小台指期貨2024.12到期: 2023.12 至 2024.4.11':
     df_original = load_data('kbars_MXF202412_2023-12-21-2024-04-11.pkl')
     product_name = '小台指期貨'
-if choice == '英業達2020.1.2 至 2024.4.12':
+if choice == choices[3] :                                           ##'英業達2020.1.2 至 2024.4.12':
     df_original = load_data('kbars_2356_2020-01-01-2024-04-12.pkl')
     product_name = '英業達2356'
-if choice == '堤維西2020.1.2 至 2024.4.12':
+if choice == choices[4] :                                                       ##'堤維西2020.1.2 至 2024.4.12':
     df_original = load_data('kbars_1522_2020-01-01-2024-04-12.pkl')
     product_name = '堤維西1522'
 
@@ -75,27 +75,27 @@ if choice == '堤維西2020.1.2 至 2024.4.12':
 
 ###### 選擇資料區間
 st.subheader("選擇資料時間區間")
-if choice == '台積電: 2022.1.1 至 2024.4.9':
+if choice == choices[0] :                       ##'台積電: 2022.1.1 至 2024.4.9':
     start_date = st.text_input('輸入開始日期(日期格式: 2022-01-01), 區間:2022-01-01 至 2024-04-09', '2022-01-01')
     end_date = st.text_input('輸入結束日期 (日期格式: 2024-04-09), 區間:2022-01-01 至 2024-04-09', '2024-04-09')
-if choice == '大台指期貨2024.12到期: 2023.12 至 2024.4.11':
+if choice == choices[1] :                                   ##'大台指期貨2024.12到期: 2023.12 至 2024.4.11':
     start_date = st.text_input('輸入開始日期(日期格式: 2023-12-21), 區間:2023-12-21 至 2024-04-11', '2023-12-21')
     end_date = st.text_input('輸入結束日期 (日期格式: 2024-04-11), 區間:2023-12-21 至 2024-04-11', '2024-04-11')
-if choice == '小台指期貨2024.12到期: 2023.12 至 2024.4.11':
+if choice == choices[2] :                                               ##'小台指期貨2024.12到期: 2023.12 至 2024.4.11':
     start_date = st.text_input('輸入開始日期(日期格式: 2023-12-21), 區間:2023-12-21 至 2024-04-11', '2023-12-21')
     end_date = st.text_input('輸入結束日期 (日期格式: 2024-04-11), 區間:2023-12-21 至 2024-04-11', '2024-04-11')
-if choice == '英業達2020.1.2 至 2024.4.12':
+if choice == choices[3] :                                                ##'英業達2020.1.2 至 2024.4.12':
     start_date = st.text_input('輸入開始日期(日期格式: 2020-01-02), 區間:2020-01-02 至 2024-04-12', '2020-01-02')
     end_date = st.text_input('輸入結束日期 (日期格式: 2024-04-12), 區間:2020-01-02 至 2024-04-12', '2024-04-12')
-if choice == '堤維西2020.1.2 至 2024.4.12':
+if choice == choices[4] :                                                             ##'堤維西2020.1.2 至 2024.4.12':
     start_date = st.text_input('輸入開始日期(日期格式: 2020-01-02), 區間:2020-01-02 至 2024-04-12', '2020-01-02')
     end_date = st.text_input('輸入結束日期 (日期格式: 2024-04-12), 區間:2020-01-02 至 2024-04-12', '2024-04-12')
 
 
-
+## 轉變為datetime object.
 start_date = datetime.datetime.strptime(start_date,'%Y-%m-%d')
 end_date = datetime.datetime.strptime(end_date,'%Y-%m-%d')
-# 使用条件筛选选择时间区间的数据
+## 使用条件筛选选择时间区间的数据
 df = df_original[(df_original['time'] >= start_date) & (df_original['time'] <= end_date)]
 
 
@@ -170,7 +170,7 @@ def Change_Cycle(Date,cycle_duration,KBar_dic,product_name):
     
 
 ###### 改變日期資料型態
-Date = start_date.strftime("%Y-%m-%d")
+Date = start_date.strftime("%Y-%m-%d")  ## 變成字串
 
 
 st.subheader("設定技術指標視覺化圖形之相關參數:")
@@ -355,6 +355,12 @@ import pandas as pd
 ###### K線圖, 移動平均線MA
 with st.expander("K線圖, 移動平均線"):
     fig1 = make_subplots(specs=[[{"secondary_y": True}]])
+    fig1.update_layout(yaxis=dict(fixedrange=False,  # 允許y軸縮放
+                                  autorange=True    # 自動調整範圍
+                                  ),
+                       xaxis=dict(rangeslider=dict(visible=True)  # 保留下方的範圍滑桿
+                                  )
+                       )
     
     #### include candlestick with rangeselector
     fig1.add_trace(go.Candlestick(x=KBar_df['time'],
@@ -376,6 +382,12 @@ with st.expander("K線圖, 移動平均線"):
 ###### K線圖, RSI
 with st.expander("長短 RSI"):
     fig2 = make_subplots(specs=[[{"secondary_y": True}]])
+    fig2.update_layout(yaxis=dict(fixedrange=False,  # 允許y軸縮放
+                                  autorange=True    # 自動調整範圍
+                                  ),
+                       xaxis=dict(rangeslider=dict(visible=True)  # 保留下方的範圍滑桿
+                                  )
+                       )
     #### include candlestick with rangeselector
     # fig2.add_trace(go.Candlestick(x=KBar_df['Time'],
     #                 open=KBar_df['Open'], high=KBar_df['High'],
@@ -394,6 +406,12 @@ with st.expander("長短 RSI"):
 ###### K線圖, Bollinger Band    
 with st.expander("K線圖,布林通道"):
     fig3 = make_subplots(specs=[[{"secondary_y": True}]])
+    fig3.update_layout(yaxis=dict(fixedrange=False,  # 允許y軸縮放
+                                  autorange=True    # 自動調整範圍
+                                  ),
+                       xaxis=dict(rangeslider=dict(visible=True)  # 保留下方的範圍滑桿
+                                  )
+                       )
     fig3.add_trace(go.Candlestick(x=KBar_df['time'],
                     open=KBar_df['open'], high=KBar_df['high'],
                     low=KBar_df['low'], close=KBar_df['close'], name='K線'),
@@ -414,6 +432,12 @@ with st.expander("K線圖,布林通道"):
 ###### MACD
 with st.expander("MACD(異同移動平均線)"):
     fig4 = make_subplots(specs=[[{"secondary_y": True}]])
+    fig4.update_layout(yaxis=dict(fixedrange=False,  # 允許y軸縮放
+                                  autorange=True    # 自動調整範圍
+                                  ),
+                       xaxis=dict(rangeslider=dict(visible=True)  # 保留下方的範圍滑桿
+                                  )
+                       )
     
     # #### include candlestick with rangeselector
     # fig4.add_trace(go.Candlestick(x=KBar_df['Time'],
@@ -437,6 +461,8 @@ with st.expander("MACD(異同移動平均線)"):
 ####### (6) 程式交易 #######
 st.subheader("程式交易:")
 
+
+#%%
 ###### 函數定義: 繪製K線圖加上MA以及下單點位
 # @st.cache_data(ttl=3600, show_spinner="正在加載資料...")  ## Add the caching decorator
 def ChartOrder_MA(Kbar_df,TR):
@@ -495,6 +521,12 @@ def ChartOrder_MA(Kbar_df,TR):
     # 開始繪圖
     # ChartKBar(KBar,addp,volume_enable)
     fig5 = make_subplots(specs=[[{"secondary_y": True}]])
+    fig5.update_layout(yaxis=dict(fixedrange=False,  # 允許y軸縮放
+                                  autorange=True    # 自動調整範圍
+                                  ),
+                       xaxis=dict(rangeslider=dict(visible=True)  # 保留下方的範圍滑桿
+                                  )
+                       )
     
     #### include candlestick with rangeselector
     # fig5.add_trace(go.Candlestick(x=KBar_df['time'],
@@ -516,36 +548,41 @@ def ChartOrder_MA(Kbar_df,TR):
     fig5.layout.yaxis2.showgrid=True
     st.plotly_chart(fig5, use_container_width=True)
 
-###### 選擇不同交易策略:
-choices_strategy = ['<進場>: 移動平均線黃金交叉作多,死亡交叉作空. <出場>: 結算平倉(期貨), 移動停損.']
-choice_strategy = st.selectbox('選擇交易策略', choices_strategy, index=0)
 
-##### 各別不同策略
-if choice_strategy == '<進場>: 移動平均線黃金交叉作多,死亡交叉作空. <出場>: 結算平倉(期貨), 移動停損.':
-    #### 選擇參數
+#%%
+###### 選擇不同交易策略:
+choices_strategies = ['<進場>: 移動平均線黃金交叉作多,死亡交叉作空. <出場>: 結算平倉(期貨), 移動停損.']
+choice_strategy = st.selectbox('選擇交易策略', choices_strategies, index=0)
+
+
+#%%
+###### 各別不同策略參數設定 & 回測
+#if choice_strategy == '<進場>: 移動平均線黃金交叉作多,死亡交叉作空. <出場>: 結算平倉(期貨), 移動停損.':
+if choice_strategy == choices_strategies[0]:
+    ##### 選擇參數
     with st.expander("<策略參數設定>: 交易停損量、長移動平均線(MA)的K棒週期數目、短移動平均線(MA)的K棒週期數目、購買數量"):
         MoveStopLoss = st.slider('選擇程式交易停損量(股票:每股價格; 期貨(大小台指):台股指數點數. 例如: 股票進場做多時, 取30代表停損價格為目前每股價格減30元; 大小台指進場做多時, 取30代表停損指數為目前台股指數減30點)', 0, 100, 30, key='MoveStopLoss')
         LongMAPeriod_trading=st.slider('設定計算長移動平均線(MA)的 K棒週期數目(整數, 例如 10)', 0, 100, 10, key='trading_MA_long')
         ShortMAPeriod_trading=st.slider('設定計算短移動平均線(MA)的 K棒週期數目(整數, 例如 2)', 0, 100, 2, key='trading_MA_short')
         Order_Quantity = st.slider('選擇購買數量(股票單位為張數(一張為1000股); 期貨單位為口數)', 1, 100, 1, key='Order_Quantity')
     
-        ### 計算長短移動平均線
+        #### 計算長短移動平均線
         KBar_df['MA_long'] = Calculate_MA(KBar_df, period=LongMAPeriod_trading)
         KBar_df['MA_short'] = Calculate_MA(KBar_df, period=ShortMAPeriod_trading)
         
-        ### 尋找最後 NAN值的位置
+        #### 尋找最後 NAN值的位置
         last_nan_index_MA_trading = KBar_df['MA_long'][::-1].index[KBar_df['MA_long'][::-1].apply(pd.isna)][0]
 
 
         
-        ### 建立部位管理物件
+        #### 建立部位管理物件
         OrderRecord=Record() 
         
         # ###### 變為字典
         # # KBar_dic = KBar_df_original.to_dict('list')
         # KBar_dic = KBar_df.to_dict('list')
         
-    #### 開始回測
+    ##### 開始回測
     for n in range(1,len(KBar_df['time'])-1):
         # 先判斷long MA的上一筆值是否為空值 再接續判斷策略內容
         if not np.isnan( KBar_df['MA_long'][n-1] ) :
@@ -591,7 +628,7 @@ if choice_strategy == '<進場>: 移動平均線黃金交叉作多,死亡交叉�
                     OrderRecord.Cover('Buy', KBar_df['product'][n+1],KBar_df['time'][n+1],KBar_df['open'][n+1],-OrderRecord.GetOpenInterest())
                     continue
 
-    #### 繪製K線圖加上MA以及下單點位    
+    ##### 繪製K線圖加上MA以及下單點位    
     ChartOrder_MA(KBar_df,OrderRecord.GetTradeRecord())
 
 ##### 繪製K線圖加上MA以及下單點位
@@ -680,7 +717,7 @@ if choice_strategy == '<進場>: 移動平均線黃金交叉作多,死亡交叉�
 
 
 
-
+#%%
 ###### 計算績效:
 # OrderRecord.GetTradeRecord()          ## 交易紀錄清單
 # OrderRecord.GetProfit()               ## 利潤清單
@@ -739,7 +776,7 @@ def 計算績效_小台指期貨():
 
 
 
-if choice == '台積電: 2022.1.1 至 2024.4.9':
+if choice == choices[0] :   ##'台積電: 2022.1.1 至 2024.4.9':
     交易總盈虧,平均每次盈虧,平均投資報酬率,平均獲利_只看獲利的,平均虧損_只看虧損的,勝率,最大連續虧損,最大盈虧回落_MDD,報酬風險比 = 計算績效_股票()
     # 交易總盈虧 = OrderRecord.GetTotalProfit()*1000          ## 取得交易總盈虧
     # 平均每次盈虧 = OrderRecord.GetAverageProfit()*1000         ## 取得交易 "平均" 盈虧(每次)
@@ -754,7 +791,7 @@ if choice == '台積電: 2022.1.1 至 2024.4.9':
     # else:
     #     報酬風險比='資料不足無法計算'
 
-if choice == '大台指期貨2024.12到期: 2023.12 至 2024.4.11':
+if choice == choices[1] :   #'大台指期貨2024.12到期: 2023.12 至 2024.4.11':
     交易總盈虧,平均每次盈虧,平均投資報酬率,平均獲利_只看獲利的,平均虧損_只看虧損的,勝率,最大連續虧損,最大盈虧回落_MDD,報酬風險比 = 計算績效_大台指期貨()
 
     # 交易總盈虧 = OrderRecord.GetTotalProfit()*200          ## 取得交易總盈虧
@@ -770,7 +807,7 @@ if choice == '大台指期貨2024.12到期: 2023.12 至 2024.4.11':
     # else:
     #     報酬風險比='資料不足無法計算'
 
-if choice == '小台指期貨2024.12到期: 2023.12 至 2024.4.11':
+if choice == choices[2] :   #'小台指期貨2024.12到期: 2023.12 至 2024.4.11':
     交易總盈虧,平均每次盈虧,平均投資報酬率,平均獲利_只看獲利的,平均虧損_只看虧損的,勝率,最大連續虧損,最大盈虧回落_MDD,報酬風險比 = 計算績效_小台指期貨()
     # 交易總盈虧 = OrderRecord.GetTotalProfit()*50          ## 取得交易總盈虧
     # 平均每次盈虧 = OrderRecord.GetAverageProfit() *50       ## 取得交易 "平均" 盈虧(每次)
@@ -785,7 +822,7 @@ if choice == '小台指期貨2024.12到期: 2023.12 至 2024.4.11':
     # else:
     #     報酬風險比='資料不足無法計算'
 
-if choice == '英業達2020.1.2 至 2024.4.12':
+if choice == choices[3] :   #'英業達2020.1.2 至 2024.4.12':
     交易總盈虧,平均每次盈虧,平均投資報酬率,平均獲利_只看獲利的,平均虧損_只看虧損的,勝率,最大連續虧損,最大盈虧回落_MDD,報酬風險比 = 計算績效_股票()
     # 交易總盈虧 = OrderRecord.GetTotalProfit()*1000          ## 取得交易總盈虧
     # 平均每次盈虧 = OrderRecord.GetAverageProfit()*1000         ## 取得交易 "平均" 盈虧(每次)
@@ -800,7 +837,7 @@ if choice == '英業達2020.1.2 至 2024.4.12':
     # else:
     #     報酬風險比='資料不足無法計算'
 
-if choice == '堤維西2020.1.2 至 2024.4.12':
+if choice == choices[4] :   #'堤維西2020.1.2 至 2024.4.12':
     交易總盈虧,平均每次盈虧,平均投資報酬率,平均獲利_只看獲利的,平均虧損_只看虧損的,勝率,最大連續虧損,最大盈虧回落_MDD,報酬風險比 = 計算績效_股票()
 
 
@@ -961,7 +998,8 @@ OrderRecord.GeneratorProfit_rateChart(StrategyName='MA')
 # st.pyplot(plt)
 
 
-####### (8) 呈現即時資料 #######
+#%%
+####### (7) 呈現即時資料 #######
 
 
 
